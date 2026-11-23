@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rumah Bangun Abadi - Katalog Bahan Bangunan</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f6f6f6;color:#111;padding-bottom:90px}
+header{background:#fff;position:sticky;top:0;z-index:30;box-shadow:0 1px 5px rgba(0,0,0,.08)}
+.top{max-width:1100px;margin:auto;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:38px;height:38px;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;border-radius:10px;font-size:14px}
+.logo b{font-size:16px;letter-spacing:-.3px;line-height:1.1;display:block}
+.logo small{color:#777;font-size:11px}
+.cart-btn{background:#f1f1f1;border:0;padding:9px 12px;border-radius:999px;font-weight:700;font-size:13px;position:relative;cursor:pointer}
+.cart-badge{position:absolute;top:-5px;right:-5px;background:#ef4444;color:#fff;font-size:11px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.search-wrap{max-width:1100px;margin:auto;padding:0 14px 10px}
+.search-wrap input{width:100%;background:#f1f1f1;border:0;border-radius:999px;padding:11px 16px;font-size:14px;outline:none}
+.cats{max-width:1100px;margin:auto;padding:0 14px 12px;display:flex;gap:8px;overflow-x:auto;white-space:nowrap}
+.cats::-webkit-scrollbar{display:none}
+.cats button{white-space:nowrap;padding:7px 13px;border-radius:999px;background:#fff;border:1px solid #ddd;font-size:13px;cursor:pointer}
+.cats button.active{background:#111;color:#fff;border-color:#111}
+main{max-width:1100px;margin:auto;padding:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1024px){.grid{grid-template-columns:repeat(4,1fr)}}
+.card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #eee;cursor:pointer}
+.card img{width:100%;height:140px;object-fit:cover;background:#eee;display:block}
+.card-body{padding:11px}
+.tag{font-size:11px;background:#f1f1f1;display:inline-block;padding:3px 8px;border-radius:999px}
+.card h3{font-size:14px;line-height:1.25;margin:6px 0 4px}
+.card small{color:#777;font-size:11px}
+.wa-small{margin-top:9px;background:#16a34a;color:#fff;text-align:center;font-size:12px;font-weight:700;padding:8px;border-radius:999px}
+.note{text-align:center;color:#999;font-size:11px;margin-top:16px;padding:0 10px}
+.popup{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:50;display:none;align-items:flex-end;justify-content:center}
+.popup.open{display:flex}
+@media(min-width:640px){.popup{align-items:center;padding:16px}}
+.popup-box{background:#fff;width:100%;max-width:680px;border-radius:18px 18px 0 0;max-height:92vh;overflow-y:auto}
+@media(min-width:640px){.popup-box{border-radius:18px}}
+.popup-head{padding:16px;display:flex;justify-content:space-between;gap:10px}
+.popup-head h2{font-size:19px;line-height:1.2}
+.close{font-size:22px;border:0;background:none;cursor:pointer;padding:0 6px}
+.popup img.main{width:calc(100% - 32px);margin:0 16px;height:220px;object-fit:cover;border-radius:12px;background:#eee}
+.specs{padding:16px}
+.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #eee;font-size:14px}
+.row span{color:#777}
+.qty-box{padding:0 16px}
+.qty{display:flex;align-items:center;gap:10px;margin-top:8px}
+.qty button{width:36px;height:36px;border-radius:50%;border:0;background:#f1f1f1;font-weight:800;font-size:16px;cursor:pointer}
+.check{display:flex;gap:8px;align-items:center;margin-top:12px;font-size:13px}
+.reco{padding:16px}
+.reco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.reco-card{border:1px solid #eee;border-radius:12px;padding:8px;cursor:pointer}
+.reco-card img{width:100%;height:60px;object-fit:cover;border-radius:8px;background:#eee}
+.reco-card p{font-size:11px;font-weight:700;line-height:1.2;margin-top:6px}
+.sticky-btn{position:sticky;bottom:0;background:#fff;border-top:1px solid #eee;padding:12px 16px;display:flex;gap:8px}
+.btn{flex:1;padding:12px;border-radius:999px;font-weight:800;font-size:13px;border:0;cursor:pointer}
+.btn-black{background:#111;color:#fff}
+.btn-green{background:#16a34a;color:#fff}
+.btn-white{background:#fff;border:1px solid #111}
+.cart-row{display:flex;gap:10px;border:1px solid #eee;border-radius:12px;padding:8px;align-items:center;margin:0 16px 10px}
+.cart-row img{width:56px;height:56px;object-fit:cover;border-radius:8px}
+.cart-row .flex1{flex:1}
+.qty-mini{display:flex;align-items:center;gap:8px;margin-top:6px}
+.qty-mini button{width:26px;height:26px;border-radius:50%;border:0;background:#f1f1f1;font-weight:800;cursor:pointer}
+.input{width:calc(100% - 32px);margin:0 16px 8px;border:1px solid #ddd;border-radius:12px;padding:11px 12px;font-size:14px;display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <div class="logo"><div class="logo-mark">RBA</div><div><b>RUMAH BANGUN ABADI</b><small>Distributor Bahan Bangunan Proyek</small></div></div>
+    <button class="cart-btn" onclick="openCart()">🛒 Keranjang <span class="cart-badge" id="cartCount">0</span></button>
+  </div>
+  <div class="search-wrap"><input id="searchInput" oninput="renderProducts()" placeholder="Cari... contoh: hebel, semen, pintu"></div>
+  <div class="cats" id="catBar"></div>
+</header>
+
+<main>
+  <div class="grid" id="grid"></div>
+  <p class="note">Harga tidak ditampilkan di katalog. Tanya via WhatsApp / RFQ untuk penawaran.</p>
+</main>
+
+<!-- DETAIL -->
+<div id="detailPopup" class="popup" onclick="if(event.target===this) closeDetail()">
+  <div class="popup-box">
+    <div class="popup-head"><div><span class="tag" id="dCat"></span><h2 id="dName" style="margin-top:8px"></h2><p id="dSub" style="color:#777;font-size:13px;margin-top:4px"></p></div><button class="close" onclick="closeDetail()">✕</button></div>
+    <img id="dImg" class="main">
+    <div class="specs" id="dSpecs"></div>
+    <div class="qty-box"><b style="font-size:14px">Jumlah</b><div class="qty"><button onclick="changeDetailQty(-1)">-</button><span id="dQty" style="font-weight:900">83</span><button onclick="changeDetailQty(1)">+</button><span id="dUnit" style="font-size:12px;color:#777"></span></div><label class="check"><input type="checkbox" id="dTolong"> Saya belum tau jumlahnya, tolong dihitungin</label></div>
+    <div class="reco"><b>Butuh Juga - Sering Dibeli Bareng</b><div class="reco-grid" id="dReco"></div></div>
+    <div class="sticky-btn"><button class="btn btn-black" onclick="addToCartFromDetail()">+ Tambah ke Keranjang</button><button class="btn btn-green" onclick="waSingle()">💬 Tanya via WhatsApp</button></div>
+  </div>
+</div>
+
+<!-- CART -->
+<div id="cartPopup" class="popup" onclick="if(event.target===this) closeCart()">
+  <div class="popup-box">
+    <div class="popup-head"><h2>Keranjang RFQ - <span id="cartTitleCount">0</span> Barang</h2><button class="close" onclick="closeCart()">✕</button></div>
+    <div id="cartList"></div>
+    <input class="input" id="buyerName" placeholder="Nama Anda">
+    <input class="input" id="buyerWA" placeholder="No WhatsApp Anda">
+    <input class="input" id="buyerProject" placeholder="Nama Proyek (opsional)">
+    <div class="sticky-btn"><button class="btn btn-green" onclick="sendWA()">Kirim via WhatsApp</button><button class="btn btn-white" onclick="sendRFQ()">Kirim RFQ</button></div>
+  </div>
+</div>
+
+<script>
+const WA_NUMBER = "6281234567890";
+const products = [
+  {id:1,name:"Hebel AAC / Bata Ringan",cat:"Bata & Dinding",sub:"Material Bangunan Ringan & Tahan Panas",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80",bahan:"AAC",ukuran:"60x20x10 cm",stok:"Ready Stock",min:83,unit:"pcs",satuan:"pcs",reco:[2,3,4]},
+  {id:2,name:"Mortar Perekat Hebel",cat:"Semen & Mortar",sub:"Perekat Bata Ringan",img:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80",bahan:"Mortar",ukuran:"40 kg / sak",stok:"Ready Stock",min:5,unit:"sak",satuan:"sak",reco:[1,3,4]},
+  {id:3,name:"Mortar Plester",cat:"Semen & Mortar",sub:"Plester Dinding",img:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80",bahan:"Mortar",ukuran:"40 kg / sak",stok:"Ready Stock",min:5,unit:"sak",satuan:"sak",reco:[1,2,4]},
+  {id:4,name:"Mortar Acian",cat:"Semen & Mortar",sub:"Acian Halus",img:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80",bahan:"Mortar",ukuran:"40 kg / sak",stok:"Ready Stock",min:5,unit:"sak",satuan:"sak",reco:[1,2,3]},
+  {id:5,name:"Pintu Kayu Meranti - 1 Set",cat:"Pintu, Kusen, Jendela & Kaca",sub:"Kusen + Daun + Hardware",img:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",bahan:"Kayu Meranti",ukuran:"80x200 cm",stok:"Ready Stock",min:1,unit:"set",satuan:"set",reco:[6,7,8]},
+  {id:6,name:"Kusen Kayu Meranti",cat:"Pintu, Kusen, Jendela & Kaca",sub:"Kusen Saja",img:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",bahan:"Kayu Meranti",ukuran:"80x200 cm",stok:"Pre-Order",min:1,unit:"set",satuan:"set",reco:[5,7,8]},
+  {id:7,name:"Engsel + Handle + Kunci",cat:"Pintu, Kusen, Jendela & Kaca",sub:"Hardware Set",img:"https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80",bahan:"Stainless",ukuran:"1 Set",stok:"Ready Stock",min:1,unit:"set",satuan:"set",reco:[5,6,8]},
+  {id:8,name:"Paving Block - Heavy Duty",cat:"Paving & Outdoor",sub:"Untuk Jalan Mobil",img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",bahan:"Beton",ukuran:"20x10x8 cm",stok:"Ready Stock",min:10,unit:"m2",satuan:"m2",reco:[9,10,1]},
+  {id:9,name:"Kanstin / Kansteen",cat:"Paving & Outdoor",sub:"Pembatas Jalan",img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",bahan:"Beton",ukuran:"60x20x15 cm",stok:"Ready Stock",min:10,unit:"pcs",satuan:"pcs",reco:[8,10,1]},
+  {id:10,name:"Semen OPC 50 kg",cat:"Semen & Mortar",sub:"Semen Biasa",img:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80",bahan:"Semen OPC",ukuran:"50 kg / sak",stok:"Ready Stock",min:10,unit:"sak",satuan:"sak",reco:[1,2,3]},
+];
+let cats=["Semua",...new Set(products.map(p=>p.cat))];
+let activeCat="Semua";
+let cart=[];
+let current=null; let detailQty=83;
+function renderCats(){document.getElementById('catBar').innerHTML=cats.map(c=>`<button onclick="setCat('${c}')" class="${activeCat===c?'active':''}">${c}</button>`).join('');}
+function setCat(c){activeCat=c;renderCats();renderProducts();}
+function renderProducts(){
+  const q=(document.getElementById('searchInput').value||"").toLowerCase();
+  const list=products.filter(p=>(activeCat==="Semua"||p.cat===activeCat) && p.name.toLowerCase().includes(q));
+  document.getElementById('grid').innerHTML=list.map(p=>`<div class="card" onclick="openDetail(${p.id})"><img src="${p.img}"><div class="card-body"><span class="tag">${p.cat}</span><h3>${p.name}</h3><small>Min. Order: ${p.min} ${p.satuan} • ${p.stok}</small><div class="wa-small">💬 WhatsApp</div></div></div>`).join('')||'<p style="grid-column:1/-1;text-align:center;color:#888;padding:30px">Produk tidak ditemukan</p>';
+}
+let popupStack = [];
+function handleBack(){
+  if(document.getElementById('cartPopup').classList.contains('open')){ closeCart(true); return true; }
+  if(document.getElementById('detailPopup').classList.contains('open')){ closeDetail(true); return true; }
+  return false;
+}
+window.addEventListener('popstate', function(e){
+  // Back button pressed -> close popup instead of exiting
+  if(handleBack()){ /* already closed, prevent exit by pushing a dummy state if needed */ }
+});
+function openDetail(id){
+  current=products.find(p=>p.id===id); detailQty=current.min;
+  document.getElementById('dName').innerText=current.name;
+  document.getElementById('dCat').innerText=current.cat;
+  document.getElementById('dSub').innerText=current.sub;
+  document.getElementById('dImg').src=current.img;
+  document.getElementById('dQty').innerText=detailQty;
+  document.getElementById('dUnit').innerText=current.satuan+" • Min. "+current.min+" "+current.satuan;
+  document.getElementById('dTolong').checked=false;
+  document.getElementById('dSpecs').innerHTML=`<div class="row"><span>Bahan</span><b>${current.bahan}</b></div><div class="row"><span>Ukuran</span><b>${current.ukuran}</b></div><div class="row"><span>Min. Order</span><b>${current.min} ${current.satuan}</b></div><div class="row"><span>Status</span><b style="color:#16a34a">● ${current.stok}</b></div>`;
+  document.getElementById('dReco').innerHTML=current.reco.map(rid=>{const r=products.find(p=>p.id===rid);return `<div class="reco-card" onclick="openDetail(${r.id})"><img src="${r.img}"><p>${r.name}</p><div style="background:#16a34a;color:#fff;text-align:center;font-size:10px;padding:5px;border-radius:999px;margin-top:6px">WhatsApp</div></div>`}).join('');
+  document.getElementById('detailPopup').classList.add('open');
+  try{ history.pushState({popup:'detail'}, ''); popupStack.push('detail'); }catch(e){}
+}
+function closeDetail(fromBack){ document.getElementById('detailPopup').classList.remove('open'); if(!fromBack && popupStack[popupStack.length-1]==='detail'){ popupStack.pop(); try{ history.back(); }catch(e){} } if(fromBack){ popupStack = popupStack.filter(x=>x!=='detail'); } }
+function changeDetailQty(d){detailQty=Math.max(current.min,detailQty+d);document.getElementById('dQty').innerText=detailQty;}
+function addToCartFromDetail(){
+  const tolong=document.getElementById('dTolong').checked;
+  const exist=cart.find(c=>c.id===current.id);
+  if(exist){exist.qty=detailQty;exist.tolong=tolong;}else{cart.push({id:current.id,qty:detailQty,tolong});}
+  updateCartUI();closeDetail(true);openCart();
+}
+function updateCartUI(){
+  document.getElementById('cartCount').innerText=cart.length;
+  document.getElementById('cartTitleCount').innerText=cart.length;
+  if(cart.length===0){document.getElementById('cartList').innerHTML='<p style="text-align:center;color:#888;padding:20px;font-size:13px">Keranjang masih kosong. Tambah produk dulu ya bos.</p>';return;}
+  document.getElementById('cartList').innerHTML=cart.map((c,i)=>{const p=products.find(x=>x.id===c.id);return `<div class="cart-row"><img src="${p.img}"><div class="flex1"><div style="font-weight:700;font-size:13px;line-height:1.2">${p.name}</div><div style="font-size:11px;color:#888">Min. ${p.min} ${p.satuan}</div><div class="qty-mini"><button onclick="changeCartQty(${i},-1)">-</button><span style="font-weight:700;font-size:13px">${c.tolong?'Konsultasi':c.qty+' '+p.satuan}</span><button onclick="changeCartQty(${i},1)">+</button></div>${c.tolong?'<div style="font-size:11px;color:#ea580c">☑ Tolong dihitungin</div>':''}</div><button onclick="removeCart(${i})" style="border:0;background:none;font-size:16px">🗑️</button></div>`}).join('');
+}
+function changeCartQty(i,d){const c=cart[i];const p=products.find(x=>x.id===c.id);if(c.tolong)return;c.qty=Math.max(p.min,c.qty+d);updateCartUI();}
+function removeCart(i){cart.splice(i,1);updateCartUI();}
+function openCart(){updateCartUI();document.getElementById('cartPopup').classList.add('open'); try{ history.pushState({popup:'cart'}, ''); popupStack.push('cart'); }catch(e){} }
+function closeCart(fromBack){ document.getElementById('cartPopup').classList.remove('open'); if(!fromBack && popupStack[popupStack.length-1]==='cart'){ popupStack.pop(); try{ history.back(); }catch(e){} } if(fromBack){ popupStack = popupStack.filter(x=>x!=='cart'); } }
+function buildWAMessage(){
+  let msg="Halo Rumah Bangun Abadi, saya mau tanya:%0A";
+  cart.forEach((c,i)=>{const p=products.find(x=>x.id===c.id);msg+=`${i+1}. ${p.name} - ${c.tolong?'Qty: Tolong dihitungin':'Qty: '+c.qty+' '+p.satuan+' (Min. '+p.min+' '+p.satuan+')'}%0A`;});
+  const n=document.getElementById('buyerName').value,w=document.getElementById('buyerWA').value,pr=document.getElementById('buyerProject').value;
+  if(n)msg+=`Nama: ${n}%0A`;if(w)msg+=`WA: ${w}%0A`;if(pr)msg+=`Proyek: ${pr}%0A`;
+  msg+="Tolong info harga dan ongkir. Terima kasih.";return msg;
+}
+function sendWA(){if(cart.length===0){alert("Keranjang masih kosong bos");return;}window.open(`https://wa.me/${WA_NUMBER}?text=${buildWAMessage()}`,"_blank");}
+function sendRFQ(){if(cart.length===0){alert("Keranjang masih kosong bos");return;}alert("RFQ terkirim! (Demo) Data RFQ ini nanti masuk ke Admin. Untuk sekarang, silakan juga kirim via WhatsApp ya bos.");sendWA();}
+function waSingle(){if(!current)return;const msg=`Halo Rumah Bangun Abadi, saya mau tanya produk: ${current.name} - ${current.ukuran}. Min. Order ${current.min} ${current.satuan}. Tolong info harga dan ongkir.`;window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`,"_blank");}
+renderCats();renderProducts();
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+</html>
